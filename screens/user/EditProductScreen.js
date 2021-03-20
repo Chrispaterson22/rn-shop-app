@@ -54,7 +54,7 @@ const EditProductScreen = props => {
 					<TextInput
 						style={styles.input}
 						value={title}
-						onChangeText={text => setTitle()}
+						onChangeText={text => setTitle(text)}
 					/>
 				</View>
 				<View style={styles.formControl}>
@@ -62,7 +62,7 @@ const EditProductScreen = props => {
 					<TextInput
 						style={styles.input}
 						value={imageUrl}
-						onChangeText={text => setImageUrl()}
+						onChangeText={text => setImageUrl(text)}
 					/>
 				</View>
 				{editedProduct ? null : (
@@ -71,7 +71,7 @@ const EditProductScreen = props => {
 						<TextInput
 							style={styles.input}
 							value={price}
-							onChangeText={text => setPrice()}
+							onChangeText={text => setPrice(text)}
 						/>
 					</View>
 				)}
@@ -80,7 +80,7 @@ const EditProductScreen = props => {
 					<TextInput
 						style={styles.input}
 						value={description}
-						onChangeText={text => setDescription()}
+						onChangeText={text => setDescription(text)}
 					/>
 				</View>
 			</View>
