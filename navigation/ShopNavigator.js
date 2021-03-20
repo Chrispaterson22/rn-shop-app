@@ -3,14 +3,15 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { Platform } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen'
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen'
 import CartScreen from '../screens/shop/CartScreen'
 import OrdersScreen from '../screens/shop/OrdersScreen'
 import UserProductsScreen from '../screens/user/UserProductsScreen'
+import EditProductScreen from '../screens/user/EditProductScreen'
 import Colors from '../constants/Colors'
-import { Ionicons } from '@expo/vector-icons'
 
 const defaultNavOptions = {
 	headerStyle: {
@@ -66,6 +67,7 @@ const OrdersNavigator = createStackNavigator(
 const AdminNavigator = createStackNavigator(
 	{
 		UserProducts: UserProductsScreen,
+		EditProduct: EditProductScreen,
 	},
 	{
 		navigationOptions: {
