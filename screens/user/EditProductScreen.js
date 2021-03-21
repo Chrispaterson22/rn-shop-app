@@ -105,42 +105,56 @@ const EditProductScreen = props => {
 		props.navigation.setParams({ submit: submitHandler })
 	}, [submitHandler])
 
-	const textChangeHandler = (inputIdentifier, text) => {
-		let isValid = false
-		if (text.trim().length > 0) {
-			isValid = true
-		}
-		dispatchFormState({
-			type: 'FORM_INPUT_UPDATE',
-			value: text,
-			isValid,
-			input: inputIdentifier,
-		})
-	}
+	const inputChangeHandler = useCallback(
+		(inputIdentifier, inputValue, inputValidity) => {
+			dispatchFormState({
+				type: 'FORM_INPUT_UPDATE',
+				value: inputValue,
+				isValid: inputValidity,
+				input: inputIdentifier,
+			})
+		},
+		[dispatchFormState]
+	)
 
 	return (
 		<ScrollView>
 			<View style={styles.form}>
 				<Input
+					id='title'
 					label='Title'
 					errorText='Please enter a valid title!'
 					keyboardType='default'
 					autoCapitalize='sentences'
 					autoCorrect
+					onInputChange={inputChangeHandler}
+					initialValue={editedProduct ? editedProduct.title : ''}
+					initiallyValid={!!editedProduct}
+					required
 				/>
 				<Input
+					id='imageUrl'
 					label='Image URL'
 					errorText='Please enter a valid image URL!'
 					keyboardType={Platform.OS === 'android' ? 'default' : 'url'}
+					onInputChange={inputChangeHandler}
+					initialValue={editedProduct ? editedProduct.imageUrl : ''}
+					initiallyValid={!!editedProduct}
+					required
 				/>
 				{editedProduct ? null : (
 					<Input
+						id='price'
 						label='Price'
 						errorText='Please enter a valid price!'
 						keyboardType='numeric'
+						onInputChange={inputChangeHandler}
+						required
+						min={0.01}
 					/>
 				)}
 				<Input
+					id='description'
 					label='Description'
 					errorText='Please enter a valid description!'
 					keyboardType='default'
@@ -148,6 +162,11 @@ const EditProductScreen = props => {
 					autoCorrect
 					multiline
 					numberOfLines={3}
+					onInputChange={inputChangeHandler}
+					initialValue={editedProduct ? editedProduct.description : ''}
+					initiallyValid={!!editedProduct}
+					required
+					min={5}
 				/>
 			</View>
 		</ScrollView>
