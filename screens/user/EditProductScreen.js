@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback, useReducer } from 'react'
 import {
 	StyleSheet,
-	Text,
 	View,
-	TextInput,
 	ScrollView,
 	Platform,
 	Alert,
+	KeyboardAvoidingView,
 } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { useSelector, useDispatch } from 'react-redux'
@@ -118,58 +117,64 @@ const EditProductScreen = props => {
 	)
 
 	return (
-		<ScrollView>
-			<View style={styles.form}>
-				<Input
-					id='title'
-					label='Title'
-					errorText='Please enter a valid title!'
-					keyboardType='default'
-					autoCapitalize='sentences'
-					autoCorrect
-					onInputChange={inputChangeHandler}
-					initialValue={editedProduct ? editedProduct.title : ''}
-					initiallyValid={!!editedProduct}
-					required
-				/>
-				<Input
-					id='imageUrl'
-					label='Image URL'
-					errorText='Please enter a valid image URL!'
-					keyboardType={Platform.OS === 'android' ? 'default' : 'url'}
-					onInputChange={inputChangeHandler}
-					initialValue={editedProduct ? editedProduct.imageUrl : ''}
-					initiallyValid={!!editedProduct}
-					required
-				/>
-				{editedProduct ? null : (
+		<KeyboardAvoidingView
+			style={{ flex: 1 }} // REQUIRED!!!!
+			behavior='padding'
+			keyboardVerticalOffset={100}
+		>
+			<ScrollView>
+				<View style={styles.form}>
 					<Input
-						id='price'
-						label='Price'
-						errorText='Please enter a valid price!'
-						keyboardType='numeric'
+						id='title'
+						label='Title'
+						errorText='Please enter a valid title!'
+						keyboardType='default'
+						autoCapitalize='sentences'
+						autoCorrect
 						onInputChange={inputChangeHandler}
+						initialValue={editedProduct ? editedProduct.title : ''}
+						initiallyValid={!!editedProduct}
 						required
-						min={0.01}
 					/>
-				)}
-				<Input
-					id='description'
-					label='Description'
-					errorText='Please enter a valid description!'
-					keyboardType='default'
-					autoCapitalize='sentences'
-					autoCorrect
-					multiline
-					numberOfLines={3}
-					onInputChange={inputChangeHandler}
-					initialValue={editedProduct ? editedProduct.description : ''}
-					initiallyValid={!!editedProduct}
-					required
-					min={5}
-				/>
-			</View>
-		</ScrollView>
+					<Input
+						id='imageUrl'
+						label='Image URL'
+						errorText='Please enter a valid image URL!'
+						keyboardType={Platform.OS === 'android' ? 'default' : 'url'}
+						onInputChange={inputChangeHandler}
+						initialValue={editedProduct ? editedProduct.imageUrl : ''}
+						initiallyValid={!!editedProduct}
+						required
+					/>
+					{editedProduct ? null : (
+						<Input
+							id='price'
+							label='Price'
+							errorText='Please enter a valid price!'
+							keyboardType='numeric'
+							onInputChange={inputChangeHandler}
+							required
+							min={0.01}
+						/>
+					)}
+					<Input
+						id='description'
+						label='Description'
+						errorText='Please enter a valid description!'
+						keyboardType='default'
+						autoCapitalize='sentences'
+						autoCorrect
+						multiline
+						numberOfLines={3}
+						onInputChange={inputChangeHandler}
+						initialValue={editedProduct ? editedProduct.description : ''}
+						initiallyValid={!!editedProduct}
+						required
+						min={5}
+					/>
+				</View>
+			</ScrollView>
+		</KeyboardAvoidingView>
 	)
 }
 
