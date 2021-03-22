@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { LogBox } from 'react-native'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import AppLoading from 'expo-app-loading'
@@ -9,6 +10,10 @@ import productsReducer from './store/reducers/products'
 import cartReducer from './store/reducers/cart'
 import ordersReducer from './store/reducers/orders'
 import ShopNavigator from './navigation/ShopNavigator'
+
+LogBox.ignoreLogs([
+	'Your project is accessing the following APIs from a deprecated global rather than a module import: Constants (expo-constants).',
+])
 
 const rootReducer = combineReducers({
 	products: productsReducer,
