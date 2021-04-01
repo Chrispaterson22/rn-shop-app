@@ -10,7 +10,7 @@ import productsReducer from './store/reducers/products'
 import cartReducer from './store/reducers/cart'
 import ordersReducer from './store/reducers/orders'
 import authReducer from './store/reducers/auth'
-import NavigationContainer from './navigation/NavigationContainer'
+import AppNavigator from './navigation/AppNavigator'
 
 LogBox.ignoreLogs([
 	'Your project is accessing the following APIs from a deprecated global rather than a module import: Constants (expo-constants).',
@@ -49,7 +49,7 @@ export default function App() {
 
 	return (
 		<Provider store={store}>
-			<NavigationContainer />
+			<AppNavigator />
 		</Provider>
 	)
 }
