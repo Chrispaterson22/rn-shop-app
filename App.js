@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 import ReduxThunk from 'redux-thunk'
+import * as Notifications from 'expo-notifications'
 
 import productsReducer from './store/reducers/products'
 import cartReducer from './store/reducers/cart'
@@ -15,6 +16,12 @@ import AppNavigator from './navigation/AppNavigator'
 LogBox.ignoreLogs([
 	'Your project is accessing the following APIs from a deprecated global rather than a module import: Constants (expo-constants).',
 ])
+
+Notifications.setNotificationHandler({
+	handleNotification: async () => {
+		return { shouldShowAlert: true }
+	},
+})
 
 const rootReducer = combineReducers({
 	products: productsReducer,
